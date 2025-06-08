@@ -33,9 +33,9 @@ suite('Unit Tests', function(){
     });
     
     test('should correctly return error on the double fraction',function(){
-      assert.instanceOf(convertHandler.getNum("3/3/3km"),Error);
-      assert.instanceOf(convertHandler.getNum("3/2/3lbs"),Error);
-      assert.instanceOf(convertHandler.getNum("3/1/3gal"),Error);
+      assert.strictEqual(convertHandler.getNum("3/3/3km"),"invalid number");
+      assert.strictEqual(convertHandler.getNum("3/2/3lbs"),"invalid number");
+      assert.strictEqual(convertHandler.getNum("3/1/3gal"),"invalid number");
 
     });
 
