@@ -1,37 +1,37 @@
 function ConvertHandler() {
   this.getNum = function(input) {
-    let match = input.match(/^([\d./]+)?[a-zA-Z]+$/);
-    if (!match) return "invalid number and unit"; // Invalid format
+  let match = input.match(/^([\d./]+)?[a-zA-Z]+$/);
+  if (!match) return "invalid number and unit"; // Catch invalid formats early
 
-    let numStr = match[1] || "1"; // Default to 1 if no number is provided
+  let numStr = match[1] || "1"; // Default to 1 if no number is provided
 
-    // Check for multiple fractions (more than one '/')
-    if ((numStr.match(/\//g) || []).length > 1) {
-      return "invalid number"; // Instead of returning an Error
+  // Check for multiple fractions (more than one '/')
+  if ((numStr.match(/\//g) || []).length > 1) {
+    return "invalid number"; // Ensure proper response
+  }
+
+  // Handle fraction safely
+  if (numStr.includes("/")) {
+    let parts = numStr.split("/");
+    if (parts.length === 2 && parts[0] && parts[1]) {
+      return parseFloat(parts[0]) / parseFloat(parts[1]);
+    } else {
+      return "invalid number"; // Ensure proper response
     }
+  }
 
-    // Handle fraction safely without eval()
-    if (numStr.includes("/")) {
-      let parts = numStr.split("/");
-      if (parts.length === 2 && parts[0] && parts[1]) {
-        return parseFloat(parts[0]) / parseFloat(parts[1]);
-      } else {
-        return "invalid number"; // Ensure proper string response
-      }
-    }
-
-    return parseFloat(numStr); // Convert to number safely
-  };
+  return isNaN(parseFloat(numStr)) ? "invalid number" : parseFloat(numStr); // Catch NaN cases
+ };
 
   this.getUnit = function(input) {
-    let match = input.match(/[a-zA-Z]+$/);
-    if (!match) return null;
+  let match = input.match(/[a-zA-Z]+$/);
+  if (!match) return null;
 
-    let unit = match[0].toLowerCase(); // Convert to lowercase
-
-    const validUnits = ["gal", "lbs", "mi", "l", "kg", "km"];
-    return unit === "l" ? "L" : validUnits.includes(unit) ? unit : null;
-  };
+  let unit = match[0].toLowerCase(); // Convert to lowercase
+  const validUnits = ["gal", "lbs", "mi", "l", "kg", "km"];
+  
+  return unit === "l" ? "L" : validUnits.includes(unit) ? unit : null; // Return null if invalid
+ };
 
   this.getReturnUnit = function(initUnit) {
     const unitMap = {
@@ -83,9 +83,9 @@ function ConvertHandler() {
     return this.getString(initNum, initUnit, returnNum, returnUnit);
   };
 
-  this.getString = function(initNum, initUnit, returnNum, returnUnit) {
-    return `${initNum} ${this.spellOutUnit(initUnit)} converts to ${returnNum.toFixed(5)} ${this.spellOutUnit(returnUnit)}`;
-  };
+ this.getString = function(initNum, initUnit, returnNum, returnUnit) {
+  return `${initNum} ${this.spellOutUnit(initUnit)} converts to ${Number(returnNum).toFixed(5)} ${this.spellOutUnit(returnUnit)}`;
+ };
 }
 
 module.exports = ConvertHandler;
