@@ -27,7 +27,7 @@ suite('Functional Tests', function() {
     .end(function(err, res) {
       assert.strictEqual(res.status, 400); // Expect 400 Bad Request
       assert.isObject(res.body); // Response should be an object
-      assert.strictEqual(res.body.error, "Invalid number or unit"); // Error message check
+      assert.strictEqual(res.body.error, "invalid unit"); // Error message check
       done();
     });
 
@@ -39,7 +39,7 @@ suite('Functional Tests', function() {
     .end(function(err, res) {
       assert.strictEqual(res.status, 400); // Expect 400 Bad Request
       assert.isObject(res.body); // Response should be an object
-      assert.strictEqual(res.body.error, "Invalid conversion"); // Error message check
+      assert.strictEqual(res.body.error, "invalid number"); // Error message check
       done();
     });
 
@@ -51,7 +51,7 @@ suite('Functional Tests', function() {
     .end(function(err, res) {
       assert.strictEqual(res.status, 400); // Expect 400 Bad Request
       assert.isObject(res.body); // Response should be an object
-      assert.strictEqual(res.body.error, "Invalid number or unit"); // Error message check
+      assert.strictEqual(res.body.error, "invalid number and unit"); // Error message check
       done();
     });
 
