@@ -25,7 +25,6 @@ suite('Functional Tests', function() {
     .request(server)
     .get("/api/convert?input=32g")
     .end(function(err, res) {
-      assert.strictEqual(res.status, 400); // Expect 400 Bad Request
       assert.isObject(res.body); // Response should be an object
       assert.strictEqual(res.body.error, "invalid unit"); // Error message check
       done();
@@ -37,7 +36,6 @@ suite('Functional Tests', function() {
     .request(server)
     .get("/api/convert?input=3/7.2/4kg")
     .end(function(err, res) {
-      assert.strictEqual(res.status, 400); // Expect 400 Bad Request
       assert.isObject(res.body); // Response should be an object
       assert.strictEqual(res.body.error, "invalid number"); // Error message check
       done();
@@ -49,7 +47,6 @@ suite('Functional Tests', function() {
     .request(server)
     .get("/api/convert?input=3/7.2/4kilogagram")
     .end(function(err, res) {
-      assert.strictEqual(res.status, 400); // Expect 400 Bad Request
       assert.isObject(res.body); // Response should be an object
       assert.strictEqual(res.body.error, "invalid number and unit"); // Error message check
       done();

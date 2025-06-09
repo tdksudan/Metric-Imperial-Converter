@@ -13,14 +13,14 @@ module.exports = function (app) {
     let initUnit = convertHandler.getUnit(input);
 
     // Proper error handling to match test requirements
-    if (initNum === "invalid number" && initUnit === null) {
-      return res.status(400).json({ error: "invalid number and unit" });
+     if (initUnit === "invalid unit" && initNum !=="invalid number") {
+      return res.json({ error: 'invalid unit' });
     }
-    if (initNum === "invalid number") {
-      return res.status(400).json({ error: "invalid number" });
+    if (initNum === "invalid number" && initUnit !=="invalid unit") {
+      return res.json({ error: 'invalid number'});
     }
-    if (initUnit === null) {
-      return res.status(400).json({ error: "invalid unit" });
+    if (initNum === "invalid number" && initUnit === "invalid unit") {
+      return res.json({ error: 'invalid number and unit' });
     }
 
     let returnNum = convertHandler.convert(initNum, initUnit);

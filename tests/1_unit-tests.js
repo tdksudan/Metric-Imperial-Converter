@@ -52,10 +52,10 @@ suite('Unit Tests', function(){
       assert.strictEqual(convertHandler.getUnit("50gal"),"gal");
     });
     test('should correctly return an error for an invalid input unit', function() {
-      assert.strictEqual(convertHandler.getUnit("10xyz"), null); // Invalid unit
-      assert.strictEqual(convertHandler.getUnit("5abc"), null);  // Invalid unit
-      assert.strictEqual(convertHandler.getUnit("123wrong"), null); // Invalid unit
-      assert.strictEqual(convertHandler.getUnit("xyz"), null); 
+      assert.strictEqual(convertHandler.getUnit("10xyz"), 'invalid unit'); // Invalid unit
+      assert.strictEqual(convertHandler.getUnit("5abc"), 'invalid unit');  // Invalid unit
+      assert.strictEqual(convertHandler.getUnit("123wrong"), 'invalid unit'); // Invalid unit
+      assert.strictEqual(convertHandler.getUnit("xyz"), 'invalid unit'); 
     });
   });
   suite('Function getReturnUnit(input)',function(){
@@ -91,12 +91,12 @@ suite('Unit Tests', function(){
   });
   suite('Function spellOutUnit',function(){
     test('should correctly return the spelled-out string unit for each valid input unit',function(){
-      assert.strictEqual(convertHandler.spellOutUnit("gal"),"gallon");
-      assert.strictEqual(convertHandler.spellOutUnit("lbs"),"pound");
-      assert.strictEqual(convertHandler.spellOutUnit("mi"),"mile");
-      assert.strictEqual(convertHandler.spellOutUnit("L"),"liter");
-      assert.strictEqual(convertHandler.spellOutUnit("kg"),"kilogram");
-      assert.strictEqual(convertHandler.spellOutUnit("km"),"kilometer");
+      assert.strictEqual(convertHandler.spellOutUnit("gal"),"gallons");
+      assert.strictEqual(convertHandler.spellOutUnit("lbs"),"pounds");
+      assert.strictEqual(convertHandler.spellOutUnit("mi"),"miles");
+      assert.strictEqual(convertHandler.spellOutUnit("L"),"liters");
+      assert.strictEqual(convertHandler.spellOutUnit("kg"),"kilograms");
+      assert.strictEqual(convertHandler.spellOutUnit("km"),"kilometers");
       assert.strictEqual(convertHandler.spellOutUnit("xyz"),null);
     });
   });
